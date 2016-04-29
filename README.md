@@ -48,8 +48,15 @@ To run the program, type
 > python pupil.py
 
 - sit about a foot away from the webcam for testing 
+
 Note: that haarcascade_eye.xml is required in the working directory in order to make the script work.
 The haarcascade file can be obtained from this link: https://github.com/Itseez/opencv/blob/master/data/haarcascades/haarcascade_eye.xml
+
+sample result: 
+
+![alt text][rs]
+[rs]: https://github.com/tkhunkhe/independent_study/blob/master/sample_result.jpeg "detected pupil"
+
 
 
 3. Pupil (and pupil only) detect from eye.jpg picture

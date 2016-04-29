@@ -31,7 +31,7 @@ It detects eye object and draw a square on each eye. The eye object model was tr
 
 To run the program, type
 
-python webcam.py haarcascade_eyes.xml
+> python webcam.py haarcascade_eyes.xml
 
 
 2. Pupil detect from webcam camera
@@ -45,7 +45,7 @@ Issues here still are that the image results saved include all the images, not j
 
 To run the program, type
 
-python pupil.py
+> python pupil.py
 
 Note: that haarcascade_eye.xml is required in the working directory in order to make the script work
 You can get the haarcascade file from this link: https://github.com/Itseez/opencv/blob/master/data/haarcascades/haarcascade_eye.xml
@@ -61,11 +61,11 @@ I modified the script and applied it to my eye.jpeg image. OpenCV uses Hough Tra
 
 To run the program, type
 
-python pupil_only.py
+> python pupil_only.py
 
 
 ##Future Tasks
-=================
+-----------------
 - improve the Pupil detect from webcam camera program to 
 	- save only the pupil results
 	- store blob(pupil) data for future machine learning tasks to predict neurological condition

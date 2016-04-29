@@ -1,4 +1,4 @@
-## Independent Study Project
+# Independent Study Project
 - University of Rochester Spring '16
 - Thanatcha Khunkhet (Kwan)
 - Mentor/Advisor: Jesse Wang
@@ -47,6 +47,7 @@ To run the program, type
 
 > python pupil.py
 
+- sit about a foot away from the webcam for testing 
 Note: that haarcascade_eye.xml is required in the working directory in order to make the script work.
 The haarcascade file can be obtained from this link: https://github.com/Itseez/opencv/blob/master/data/haarcascades/haarcascade_eye.xml
 
@@ -58,8 +59,8 @@ Sorce of learning: http://opencv-python-tutroals.readthedocs.io/en/latest/py_tut
 I modified the script and applied it to my eye.jpeg image. OpenCV uses Hough Transform to find circles in an image. Pupil is generally a circle. So, I tried to apply this method to find a pupil. However, the challenging part is to find the best parameter for cv2.HoughCircles(). I experimented adjusting param 1 and param 2 until it found a circle for a pupil. The bigger the param 2 is, the less number of circle detected. For the next step, we can create a simple GUI including for user to help inputting these parameters to find a pupil from different eye images.
 
 detected result: 
-![alt text][eye]
 
+![alt text][eye]
 [eye]: https://github.com/tkhunkhe/independent_study/blob/master/detected_pupil.jpg "detected eye"
 
 
@@ -73,6 +74,7 @@ To run the program, type
 ##Future Tasks
 -----------------
 - improve the Pupil detect from webcam camera program to 
+	- prevent from crashing
 	- save only the pupil results
 	- store blob(pupil) data for future machine learning tasks to predict neurological condition
 	- collect patients and control data eye video data

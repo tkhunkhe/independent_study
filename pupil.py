@@ -122,11 +122,12 @@ while(cap.isOpened()):
 
 			img = Image(pupilFrame) # This will rotate -90 and flipVertical your original image
 			img = img.rotate90().flipVertical() # it is crucial to rotate and flip before detecting blob
+
 			bm = BlobMaker()
 			blobs = bm.extractFromBinary(img.binarize(), img) # high thresh will result in detect bigger blob
 			if len(blobs) > 0:
-				if(blobs[0].radius()>= 9 and blobs[0].radius()<=23
-				 	and blobs[0].aspectRatio()>=0.7 and blobs[0].aspectRatio()<=1.4): # < 0.7 detect side, > 1.4 detect something else
+				if(blobs[0].radius()>= 10
+				 	and blobs[0].aspectRatio()>=0.8 and blobs[0].aspectRatio()<=1.4): # < 0.7 detect side, > 1.4 detect something else
 					count = count + 1
 					blobs[0].draw(Color.RED, layer=img.dl())
 					print "aspect ratio ", blobs[0].aspectRatio()

@@ -1,5 +1,5 @@
 ## Independent Study Project
-- Spring '16
+- University of Rochester Spring '16
 - Thanatcha Khunkhet (Kwan)
 - Mentor/Advisor: Jesse Wang
 

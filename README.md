@@ -14,8 +14,11 @@ Although I was really interested in Machine Vision and this project, I had zero 
 
 ## How far I've got to
 I have implemented (or selected or/and modified) 3 programs. These are 
+
 1. Eye detection from webcam
+
 2. Pupil detection from webcam (with Cascade Classifier( with 'haarcascade_eye.xml'), Morphology Extraction, contour funding in image, and blob detection)
+
 3. Pupil detection from static eye image (using Hough Circle Transform from OpenCV)
 
 

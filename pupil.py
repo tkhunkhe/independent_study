@@ -1,12 +1,16 @@
 #Identify pupils. Based on beta 1
 
 import numpy as np
+from SimpleCV import *
 import cv2
+import cv2.cv as cv
 import time
+
 
 cap = cv2.VideoCapture(0) 	#640,480 # from webcam
 w = 640
 h = 480
+count = 1
 
 while(cap.isOpened()):
     ret, frame = cap.read() # read frame from webcam, return ret = true if frame is read correctly
@@ -18,11 +22,14 @@ while(cap.isOpened()):
 	
 		#detect face
 		frame = cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY)
+		
 		faces = cv2.CascadeClassifier('haarcascade_eye.xml')
 		detected = faces.detectMultiScale(frame, 1.3, 5) # Detects objects of different sizes in the input image. The detected objects are returned as a list of rectangles.
 	
 		#faces = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 		#detected2 = faces.detectMultiScale(frameDBW, 1.3, 5)
+
+
 		
 		pupilFrame = frame
 		pupilO = frame
@@ -38,13 +45,18 @@ while(cap.isOpened()):
 			pupilFrame = cv2.equalizeHist(frame[y+(h*.25):(y+h), x:(x+w)]) # Equalizes the histogram of a grayscale image. # The algorithm normalizes the brightness and increases the contrast of the image.
 
 			pupilO = pupilFrame # equalized pupilFrame
+
+
+
 			ret, pupilFrame = cv2.threshold(pupilFrame,55,255,cv2.THRESH_BINARY)		#50 ..nothin 70 is better # to get binary image out of a grayscale image
-			
+
+
 			# Performs advanced morphological transformations. CLOSE ERODE OPEN
 			# read: http://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html
 			pupilFrame = cv2.morphologyEx(pupilFrame, cv2.MORPH_CLOSE, windowClose) 
 			pupilFrame = cv2.morphologyEx(pupilFrame, cv2.MORPH_ERODE, windowErode)
 			pupilFrame = cv2.morphologyEx(pupilFrame, cv2.MORPH_OPEN, windowOpen)
+
 
 			#so above we do image processing to get the pupil..
 			#now we find the biggest blob and get the centriod
@@ -94,11 +106,39 @@ while(cap.isOpened()):
 						maxArea = area
 						largeBlob = cnt
 					
-				
+
+
+			
+
 			if len(largeBlob) > 0:	
 				center = cv2.moments(largeBlob)
 				cx,cy = int(center['m10']/center['m00']), int(center['m01']/center['m00'])
-				cv2.circle(pupilO,(cx,cy),5,255,-1) # fill white circle for pupil deteced area
+				cv2.circle(pupilO,(cx,cy),5,255,-1) # fill white circle for pupil deteced area # this will go to frame1
+			
+			################################################################
+			## this part is modified from the original pupil.py
+			## @author = Kwan Khunkhet
+			################################################################
+
+			img = Image(pupilFrame) # This will rotate -90 and flipVertical your original image
+			img = img.rotate90().flipVertical() # it is crucial to rotate and flip before detecting blob
+			bm = BlobMaker()
+			blobs = bm.extractFromBinary(img.binarize(), img) # high thresh will result in detect bigger blob
+			if len(blobs) > 0:
+				if(blobs[0].radius()>= 9 and blobs[0].radius()<=23
+				 	and blobs[0].aspectRatio()>=0.7 and blobs[0].aspectRatio()<=1.4): # < 0.7 detect side, > 1.4 detect something else
+					count = count + 1
+					blobs[0].draw(Color.RED, layer=img.dl())
+					print "aspect ratio ", blobs[0].aspectRatio()
+					print "area ", blobs[0].area()
+					#locationStr = '(' + str(blobs[0].x) + ',' + str(blobs[0].y) + ')'
+					ratioStr = str(round(blobs[0].aspectRatio(),2))
+					areaStr = 'area: ' + str(round(blobs[0].area()))
+					img.drawText(ratioStr, 0,0, color=Color.BLUE, fontsize=11)
+					img.drawText(areaStr, img.size()[0]-40, img.size()[1]-16, color=Color.BLUE, fontsize=11)
+	    			img.show()
+	    			img.save("result/"+str(count)+".jpeg")
+
 
 	
 		#show picture
@@ -113,7 +153,6 @@ while(cap.isOpened()):
 # Release everything if job is finished
 cap.release()
 cv2.destroyAllWindows()
-
 
 
 

@@ -60,7 +60,7 @@ I modified the script and applied it to my eye.jpeg image. OpenCV uses Hough Tra
 detected result: 
 ![alt text][eye]
 
-[eye]: https://github.com/tkhunkhe/detected_pupil.jpg "detected eye"
+[eye]: https://github.com/tkhunkhe/independent_study/detected_pupil.jpg "detected eye"
 
 
 ------------------------------------------------------------------------------------------------

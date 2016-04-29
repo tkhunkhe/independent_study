@@ -82,7 +82,7 @@ To run the program, type
 -----------------
 - improve the Pupil detect from webcam camera program to 
 	- prevent from crashing
-	- save only the pupil results
+	- save only the pupil results (and scale it bigger)
 	- store blob(pupil) data for future machine learning tasks to predict neurological condition
 	- collect patients and control data eye video data
 	- train/test machine learning model.

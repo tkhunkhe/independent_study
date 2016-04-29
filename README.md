@@ -24,6 +24,11 @@ I have implemented (or selected or/and modified) 3 programs. These are
 
 ## About the CODEs !
 
+#### Packages required
+- OpenCV : http://opencv.org/
+- SimpleCV : http://simplecv.org/
+- NumPy : http://www.scipy.org/scipylib/download.html
+
 1. Webcam-Eye-Detect
 ==================
 
